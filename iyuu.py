@@ -1,15 +1,15 @@
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-class iyuu(object):
-    token = None
-    def __init__(self, IYUU_TOKEN):
-        self.token = f"https://iyuu.cn/{IYUU_TOKEN}.send"
-
-    def __call__(self, text, desp=""):
+def iyuu(IYUU_TOKEN):
+    url = f"https://iyuu.cn/{IYUU_TOKEN}.send"
+    headers = {'Content-type': 'application/x-www-form-urlencoded'}
+    def send(text, desp=""):
         Form = {'text': text, 'desp': desp}
-        return requests.post(self.token, data=Form, headers={'Content-type': 'application/x-www-form-urlencoded'}, verify=False)
-
+        return requests.post(url, data=Form, headers=headers, verify=False)
+    return send
 if __name__ == "__main__":
+    #get token via http://iyuu.cn/
     info = iyuu('IYUU2325Tb0e7aff495efcced893463190750ecbefe0ae8ae')
-    info('Host online', 'send by python')
+    info('Host online1', 'send by python')
+    info('Host online2', 'send by python')
